@@ -1,17 +1,105 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+    <meta name="description" content="小猿搜题">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <%= htmlWebpackPlugin.options.script %>
+    <% if (htmlWebpackPlugin.options.title) {%>
+    <title>
+        <%- htmlWebpackPlugin.options.title %>
+    </title>
+    <%} else {%>
+    <title></title>
+    <%}%>
+    <link rel="stylesheet" href="https://gallery.fbcontent.cn/api/ape/resources/17741ac7c6267ba.css">
+    <link rel="stylesheet" href="https://gallery.fbcontent.cn/api/ape/resources/dSVgGCJX4fYb1_pCID0jds.css">
+    <style>
+        body {
+            font-family: -apple-system;
+        }
+        .MathJax_SVG .noError {
+            border: none!important;
+        }
+        .mjx-chtml {
+            font-size-adjust: none;
+        }
+        .section-content mjx-math * {
+            overflow-x: visible !important;
+        }
+        mjx-stretchy-h > mjx-ext {
+            overflow: hidden !important;
+        }
+    </style>
+    <script src="polyfill.js"></script>
+    <script>
+    function isTabletDevice() {
+        const userAgent = navigator.userAgent;
+        return   /(?:iPad|PlayBook)/.test(userAgent) || (/(?:android|Android)/.test(userAgent) && !/(?:Mobile)/.test(userAgent)) || /(?:Tablet)/.test(userAgent);
+    }
+    var isTablet = isTabletDevice();
+    (function () {
+        function setRfs () {
+            var designWidth = 750,
+              rem2px = 100
+            if (!isTablet) {
+                document.documentElement.style.fontSize = Math.max(document.documentElement.clientWidth / designWidth * rem2px, 42.67) + 'px';
+            } else {
+                // 获取屏幕宽高
+                clientWidth = document.documentElement.clientWidth;
+                clientHeight = document.documentElement.clientHeight;
+                var isPortrait = clientHeight > clientWidth; // 判断是否为竖屏模式
+
+                if (isPortrait) {
+                    designWidth = 1536;
+                    // 平板竖屏时，设计稿按照1536的尺寸来设计
+                    // 竖屏模式，使用屏幕宽度计算fontSize
+                } else {
+                    designWidth = 2048;
+                    // 横屏模式，使用屏幕高度计算fontSize
+                }
+                document.documentElement.style.fontSize = Math.max(clientWidth / designWidth * rem2px, 50) + 'px';
+            }
+        }
+
+        setRfs()
+        var tid
+        window.addEventListener('resize', function () {
+            console.log(document.documentElement.clientWidth, 'document.documentElement.clientWidth')
+            clearTimeout(tid)
+            tid = setTimeout(setRfs, 100)
+        }, false)
+    })()
+    </script>
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            // processEscapes: true,
+            // packages: {'[+]': ['noerrors']}
+        },
+        startup: {
+            ready: function () {
+                MathJax.startup.defaultReady();
+            },
+        }
+    }
+    </script>
+
+</head>
+<body>
+<% if (process.env.VUE_APP_CONFIG === 'test') {
+%>
+<script src="https://img-pub-test.oss-cn-beijing.aliyuncs.com/eruda.js"></script>
+<script>eruda.init()</script>
+<script src="https://xyst.yuanfudao.biz/h5/solar-venv-tools/venv-0.1.0.js"></script>
+<% } %>
+<div id="app"></div>
+</body>
+<script defer src="https://solar.fbcontent.cn/h5/solar-web-mathjax3/es5/tex-chtml.js"></script>
 </html>
